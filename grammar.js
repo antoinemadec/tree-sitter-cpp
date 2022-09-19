@@ -712,11 +712,12 @@ module.exports = grammar(C, {
       optional('constexpr'),
       field('condition', $.condition_clause),
       field('consequence', $._statement),
-      optional(seq(
-        'else',
-        field('alternative', $._statement)
-      ))
+      optional(field("alternative", $.else_clause))
     )),
+
+    else_clause: $ => seq(
+      'else', $._statement
+    ),
 
     for_range_loop: $ => seq(
       'for',
